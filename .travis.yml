@@ -4,20 +4,22 @@ node_js:
 before_script:
 - npm install -g gulp
 after_success:
-- "echo 'pass'"
+- echo 'pass'
 before_deploy:
-- "echo 'deploy'"
+- echo 'deploy'
 - gulp build
 deploy:
   provider: s3
+  access_key_id: "$AWS_S3_ID"
+  secret_access_key: "$AWS_S3_SECRET"
   bucket: goangular-travis-test
   local-dir: dist
   upload-dir: build
   on:
     repo: colinmacdonald/goangular
 after_deploy:
-- "echo 'deployed'"
+- echo 'deployed'
 env:
   global:
-  - secure: OKozLiw7Ft6lYJX4E+dTnAI4LpO4Dk579LUlShH/aC9/8xhqfJT5M4I8w5exeViHMkvBeeALwhgvHymxOunFa5E3ZsL8/9suAXfPn0MX02Dpl0tEuwQHP1hLu1Ijz/GgbHtQJrlUlMgXcTEpAgZ+NQi67QLm825/gIdMrdk2U04=
-  - secure: P3ePuxl/xLsnT6DAZ6NYnH9uCZzvMB/Vv0U1isc1gMncA2sRZtDvAsIYYBS0zcLnr1UqZxR3WbQrHKUddQDk+U2XMZm+Hyv4aE6IcrDRXIeip1L36QbGJEeD1Jxa1QT++EFLCp7SdGQECLmRcM8SKTDyJhmJP0NlJCdWcubEl0o=
+  - secure: UGEqnlRb4EjhaNbsHtzLmSV5lXxj82b2VcfokM7RlFH1NBTm8aREBuDwyPjo7dSDsGYHf1Ehy//VLa+1JLsJtWb1wpf6oNEjYvszjfTw2AAAej4tS/HAdldRWEBZWuW5epq+M5/U+vm4ETZwYBgNmyxnmwVnPfYUOfrt/Y3Mu9I=
+  - secure: DWVkqwYdmtwuFKAv7GmJbnEjM6R0Zgfx9By3Jk4ULRrae86KWyxSbIgs+/+NHqP+0E3Cb+vKQjiJicEQ6Q8U70+9ocJuW28DOZhcAXgb0OFJrzuWKngJUVdsGkr8EKDK3en34csAxmfhCFuwxb110+r5NBki5FMAvN+rSXjurjI=
