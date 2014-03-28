@@ -5,7 +5,8 @@ before_script:
 - npm install -g gulp
 - echo "$TRAVIS_COMMIT"
 - echo "$TRAVIS_BRANCH"
-- echo "$TRAVIS_BUILD_NUMBER"
+- echo "test/ $TRAVIS_BUILD_NUMBER /testtest"
+- ./script.sh
 after_success:
 - echo "pass"
 before_deploy:
@@ -16,7 +17,7 @@ deploy:
   secret_access_key: "$AWS_S3_SECRET"
   bucket: goangular-travis-test
   local-dir: dist
-  upload-dir: "$TRAVIS_BRANCH"
+  upload-dir: "integrations/goangular/$TRAVIS_BRANCH"
   on:
     tags: true
     all_branches: true
