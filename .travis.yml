@@ -17,7 +17,7 @@ deploy:
     tags: true
     all_branches: true
     repo: colinmacdonald/goangular
-    condition: "$TRAVIS_COMPARE = ''"
+    condition: "$TRAVIS_COMMIT_RANGE = ''"
 after_deploy:
 - echo "deployed"
 env:
