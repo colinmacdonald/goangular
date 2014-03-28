@@ -5,7 +5,8 @@ before_script:
 - npm install -g gulp
 deploy:
   provider: s3
-  access_key_id: AKIAJMGDAX6442OAY7FA
+  access_key_id:
+    secure: PONQEpZ31uFbU3hIeQC1MVR15wtkgC2C27DVuIsphPbIrK/PBinMx1fJdFxtDqCkH3nhGzDUOcJE3xbo575rfsoteus1B9BaIJLli/iBY3SukY705zkAqwUIDYXoI/8LVl+2wGvc1ZJRR8BEZGeF0ZX1Os+qCR4kzbLnVfilJjs=
   secret_access_key:
     secure: Ov586iScE3MwQ6jRs6/wB4/skSKKMK+YW6X+o87kNXfou1XgVSav6Iu/9plDLnhbXz63gMJDflZYwgYfDWsJglB2V5iGzdtjFDqKnnL7xwhoT0hv4bEhKx4CCrbxLR/QCcRMFB5rALVNl73esInHp96cfFLZdR/FKybJSJvwAvA=
   bucket: goangular-travis-test
