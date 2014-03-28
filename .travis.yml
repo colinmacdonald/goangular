@@ -14,11 +14,11 @@ deploy:
   secret_access_key: "$AWS_S3_SECRET"
   bucket: goangular-travis-test
   local-dir: dist
-  upload-dir: build
+  upload-dir: build/test
   on:
     repo: colinmacdonald/goangular
 after_deploy:
-- echo 'deployed'
+- echo 'deployed $TRAVIS_BRANCH $TRAVIS_TAG'
 env:
   global:
   - secure: UGEqnlRb4EjhaNbsHtzLmSV5lXxj82b2VcfokM7RlFH1NBTm8aREBuDwyPjo7dSDsGYHf1Ehy//VLa+1JLsJtWb1wpf6oNEjYvszjfTw2AAAej4tS/HAdldRWEBZWuW5epq+M5/U+vm4ETZwYBgNmyxnmwVnPfYUOfrt/Y3Mu9I=
