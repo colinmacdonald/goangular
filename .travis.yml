@@ -5,10 +5,13 @@ before_script:
 - npm install -g gulp
 deploy:
   provider: s3
-  bucket: "S3 Bucket"
-  skip_cleanup: true
+  access_key_id: AKIAJMGDAX6442OAY7FA
+  secret_access_key:
+    secure: Ov586iScE3MwQ6jRs6/wB4/skSKKMK+YW6X+o87kNXfou1XgVSav6Iu/9plDLnhbXz63gMJDflZYwgYfDWsJglB2V5iGzdtjFDqKnnL7xwhoT0hv4bEhKx4CCrbxLR/QCcRMFB5rALVNl73esInHp96cfFLZdR/FKybJSJvwAvA=
+  bucket: goangular-travis-test
   local-dir: build
-  upload-dir: travis-builds
+  upload-dir: build
   on:
     tags: true
+    repo: colinmacdonald/goangular
     branch: master
