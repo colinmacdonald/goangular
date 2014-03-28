@@ -52,3 +52,5 @@ goangular.factory('$goUsers', [
 ]);
 
 goangular.filter('keyFilter', keyFilter);
+
+console.log('asdadssd');
