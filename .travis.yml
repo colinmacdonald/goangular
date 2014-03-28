@@ -3,15 +3,19 @@ node_js:
 - '0.10'
 before_script:
 - npm install -g gulp
+before_depot:
+  "echo 'ready?'"
 deploy:
   provider: s3
   bucket: goangular-travis-test
-  local-dir: build
+  local-dir: dist
   upload-dir: build
   on:
     tags: true
     repo: colinmacdonald/goangular
     branch: master
+before_depot:
+  "echo 'deployed'"
 env:
   global:
   - secure: OKozLiw7Ft6lYJX4E+dTnAI4LpO4Dk579LUlShH/aC9/8xhqfJT5M4I8w5exeViHMkvBeeALwhgvHymxOunFa5E3ZsL8/9suAXfPn0MX02Dpl0tEuwQHP1hLu1Ijz/GgbHtQJrlUlMgXcTEpAgZ+NQi67QLm825/gIdMrdk2U04=
