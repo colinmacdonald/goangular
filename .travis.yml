@@ -3,13 +3,7 @@ node_js:
 - '0.10'
 before_script:
 - npm install -g gulp
-- echo "$TRAVIS_COMMIT"
-- echo "$TRAVIS_BRANCH"
-- echo "test/ $TRAVIS_BUILD_NUMBER /testtest"
-- echo "test/$TRAVIS_BUILD/asdadads"
 - ./script.sh
-after_success:
-- echo "pass"
 before_deploy:
 - gulp build
 deploy:
@@ -23,6 +17,7 @@ deploy:
     tags: true
     all_branches: true
     repo: colinmacdonald/goangular
+    condition: "$TRAVIS_COMPARE = ''"
 after_deploy:
 - echo "deployed"
 env:
