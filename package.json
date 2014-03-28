@@ -4,8 +4,7 @@
   "description": "AngularJS bindings for GoInstant",
   "main": "Gruntfile.js",
   "scripts": {
-    "test": "gulp test",
-    "build": "gulp build"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
