@@ -14,8 +14,6 @@ deploy:
   local-dir: dist
   upload-dir: "integrations/goangular/latest/$TRAVIS_BRANCH"
   on:
-    tags: true
-    all_branches: true
     repo: colinmacdonald/goangular
     condition:
     - $IS_TAG
@@ -27,8 +25,6 @@ deploy:
   local-dir: dist
   upload-dir: "integrations/goangular/$TRAVIS_BRANCH"
   on:
-    tags: true
-    all_branches: true
     repo: colinmacdonald/goangular
     condition:
     - $IS_TAG
