@@ -3,22 +3,10 @@ node_js:
 - '0.10'
 before_script:
 - npm install -g gulp
-- source deploy/tag_latest.sh
+- source deploy/tags.sh
 before_deploy:
 - gulp build
 deploy:
-- provider: s3
-  access_key_id: "$AWS_S3_ID"
-  secret_access_key: "$AWS_S3_SECRET"
-  bucket: goangular-travis-test
-  local-dir: dist
-  upload-dir: "integrations/goangular/$TRAVIS_BRANCH"
-  on:
-    tags: true
-    all_branches: true
-    repo: colinmacdonald/goangular
-    condition:
-    - "$TRAVIS_COMMIT_RANGE = ''"
 - provider: s3
   access_key_id: "$AWS_S3_ID"
   secret_access_key: "$AWS_S3_SECRET"
@@ -30,10 +18,22 @@ deploy:
     all_branches: true
     repo: colinmacdonald/goangular
     condition:
-    - "$TRAVIS_COMMIT_RANGE = ''"
-    - "$TRAVIS_BRANCH = $TAG_LATEST"
+    - $IS_TAG
+    - $IS_LATEST
+- provider: s3
+  access_key_id: "$AWS_S3_ID"
+  secret_access_key: "$AWS_S3_SECRET"
+  bucket: goangular-travis-test
+  local-dir: dist
+  upload-dir: "integrations/goangular/$TRAVIS_BRANCH"
+  on:
+    tags: true
+    all_branches: true
+    repo: colinmacdonald/goangular
+    condition:
+    - $IS_TAG
 after_deploy:
-- echo "deployed $TRAVIS_BRANCH $TAG_LATEST"
+- echo "deployed $TRAVIS_BRANCH"
 env:
   global:
   - secure: UGEqnlRb4EjhaNbsHtzLmSV5lXxj82b2VcfokM7RlFH1NBTm8aREBuDwyPjo7dSDsGYHf1Ehy//VLa+1JLsJtWb1wpf6oNEjYvszjfTw2AAAej4tS/HAdldRWEBZWuW5epq+M5/U+vm4ETZwYBgNmyxnmwVnPfYUOfrt/Y3Mu9I=
