@@ -23,6 +23,7 @@ echo "Is latest: $IS_LATEST"
 echo $TAG_EXISTS
 echo $LATEST_TAG
 echo $BRANCH_IS_TAG
+echo $LATEST_TAG_COMMIT
 
 export IS_LATEST
 export IS_TAG
