@@ -17,8 +17,8 @@ deploy:
     all_branches: true
     repo: colinmacdonald/goangular
     condition:
-    - "$IS_TAG = true"
-    - "$IS_LATEST = true"
+    - "$IS_TAG != 0"
+    - "$IS_LATEST != 0"
 - provider: s3
   access_key_id: "$AWS_S3_ID"
   secret_access_key: "$AWS_S3_SECRET"
@@ -29,7 +29,7 @@ deploy:
     all_branches: true
     repo: colinmacdonald/goangular
     condition:
-    - "$IS_TAG = true"
+    - "$IS_TAG != 0"
 after_deploy:
 - echo "deployed $TRAVIS_BRANCH"
 env:
