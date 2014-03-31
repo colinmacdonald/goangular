@@ -17,7 +17,8 @@ deploy:
     tags: true
     all_branches: true
     repo: colinmacdonald/goangular
-    condition: "$TRAVIS_COMMIT_RANGE = ''"
+    condition:
+    - "$TRAVIS_COMMIT_RANGE = ''"
 - provider: s3
   access_key_id: "$AWS_S3_ID"
   secret_access_key: "$AWS_S3_SECRET"
@@ -28,9 +29,11 @@ deploy:
     tags: true
     all_branches: true
     repo: colinmacdonald/goangular
-    condition: "$TRAVIS_BRANCH = $TAG_LATEST"
+    condition:
+    - "$TRAVIS_COMMIT_RANGE = ''"
+    - "$TRAVIS_BRANCH = $TAG_LATEST"
 after_deploy:
-- echo "deployed $TRAVIS_BRANCH"
+- echo "deployed $TRAVIS_BRANCH $TAG_LATEST"
 env:
   global:
   - secure: UGEqnlRb4EjhaNbsHtzLmSV5lXxj82b2VcfokM7RlFH1NBTm8aREBuDwyPjo7dSDsGYHf1Ehy//VLa+1JLsJtWb1wpf6oNEjYvszjfTw2AAAej4tS/HAdldRWEBZWuW5epq+M5/U+vm4ETZwYBgNmyxnmwVnPfYUOfrt/Y3Mu9I=
