@@ -26,5 +26,3 @@ echo $BRANCH_IS_TAG
 
 export IS_LATEST
 export IS_TAG
-
-#printenv
