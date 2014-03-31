@@ -14,10 +14,12 @@ deploy:
   local-dir: dist
   upload-dir: "integrations/goangular/latest/$TRAVIS_BRANCH"
   on:
+    tags: true
+    all_branches: true
     repo: colinmacdonald/goangular
     condition:
-    - "$IS_TAG = $TRUE"
-    - "$IS_LATEST = $TRUE"
+    - "$IS_TAG = true"
+    - "$IS_LATEST = true"
 - provider: s3
   access_key_id: "$AWS_S3_ID"
   secret_access_key: "$AWS_S3_SECRET"
@@ -25,9 +27,11 @@ deploy:
   local-dir: dist
   upload-dir: "integrations/goangular/$TRAVIS_BRANCH"
   on:
+    tags: true
+    all_branches: true
     repo: colinmacdonald/goangular
     condition:
-    - "$IS_TAG = $TRUE"
+    - "$IS_TAG = true"
 after_deploy:
 - echo "deployed $TRAVIS_BRANCH"
 env:

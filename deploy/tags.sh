@@ -27,5 +27,6 @@ export IS_LATEST
 export IS_TAG
 export TRUE=true
 export FALSE=false
+export TEST=work
 
 printenv
