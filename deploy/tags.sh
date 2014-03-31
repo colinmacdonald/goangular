@@ -9,15 +9,15 @@ POINTS_TO_TAG=`git tag --points-at $TRAVIS_COMMIT`
 IS_LATEST=false
 IS_TAG=false
 
-# Check if latest tag hash matches the commit hash
-if [ $TAG_LATEST == "$TRAVIS_COMMIT" ]; then
-  IS_LATEST=true
-fi
-
 # Check if commit hash exists in list of tag hashes
 # and the tag points to the TRAVIS_COMMIT
 if [ $TRAVIS_BRANCH == "$POINTS_TO_TAG" ] && $CONTAINS_HASH; then
   IS_TAG=true
+fi
+
+# Check if latest tag hash matches the commit hash
+if [ $TAG_LATEST == "$TRAVIS_COMMIT" ]; then
+  IS_LATEST=true
 fi
 
 echo $IS_LATEST
