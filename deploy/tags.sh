@@ -1,3 +1,5 @@
+git fetch --tags
+
 # Is Tag
 TAG_EXISTS=`git show-ref --tags --hash | grep -w $TRAVIS_COMMIT | wc -l`
 BRANCH_IS_TAG=`git tag --points-at $TRAVIS_COMMIT | grep -w $TRAVIS_BRANCH | wc -l`
