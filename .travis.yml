@@ -3,7 +3,7 @@ node_js:
 - '0.10'
 before_script:
 - npm install -g gulp
-- ./deploy/tag_latest.sh
+- source deploy/tag_latest.sh
 before_deploy:
 - gulp build
 deploy:
