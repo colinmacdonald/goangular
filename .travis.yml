@@ -10,7 +10,7 @@ deploy:
 - provider: s3
   access_key_id: "$AWS_S3_ID"
   secret_access_key: "$AWS_S3_SECRET"
-  bucket: goangular-travis-test
+  bucket: goangular.travis.test
   local-dir: dist
   upload-dir: "integrations/goangular/latest/$TRAVIS_BRANCH"
   on:
@@ -22,7 +22,7 @@ deploy:
 - provider: s3
   access_key_id: "$AWS_S3_ID"
   secret_access_key: "$AWS_S3_SECRET"
-  bucket: goangular-travis-test
+  bucket: goangular.travis.test
   local-dir: dist
   upload-dir: "integrations/goangular/$TRAVIS_BRANCH"
   on:
