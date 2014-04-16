@@ -35,11 +35,7 @@ after_deploy:
 notifications:
   hipchat:
     rooms:
-    - $HIPCHAT_ROOM1
-  template:
-  - '<a href="%{build_url}">%{branch}</a> - <a href="%{compare_url}">%{commit}</a>
-    : %{message}'
-  format: html
+      secure: YeIZe5qzwpkzFrISnkNFTOCY2sWUtI9Ii6LHVuwKxuvQTA4RJTEMCcdJRAnJx/+0POy09Fv7kRWD9d7n6gl5xGYBP1mY50vWa8qIQgAAR4Tp07AFDHJEQ7lWm8aKL1dzYpgPw5tuNDzIXzEsnRxSE9XD4XXqSNMHx5x83ODrJZI=
 env:
   global:
   - secure: CJwxMBA7Jf7xNTGTUgnTuarUXcQp13SU83dh+mM0E8JNS5PMakcJzAX1BxpX5eUygUGD/kklGiCTXv+IiUmaEjmHPw1IwYQqtP5Sitnt/Ujbw/nERfus4aiFpe2USCXJGYJs2/HCZoTb7XJU4do6YoFLGpA241BnRjI1iKPhf04=
