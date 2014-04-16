@@ -35,7 +35,11 @@ after_deploy:
 notifications:
   hipchat:
     rooms:
-      secure: YeIZe5qzwpkzFrISnkNFTOCY2sWUtI9Ii6LHVuwKxuvQTA4RJTEMCcdJRAnJx/+0POy09Fv7kRWD9d7n6gl5xGYBP1mY50vWa8qIQgAAR4Tp07AFDHJEQ7lWm8aKL1dzYpgPw5tuNDzIXzEsnRxSE9XD4XXqSNMHx5x83ODrJZI=
+      secure: kh6PlXFn6TSK1HL0blfB0PN3Lgpug+T0L0/RntvZMf00L3YwK/88vvPKGo0fSX2BAqkGCfV1PRPB+UjS7Ui/uEttEA8pEzSEl6aLKrvw8ji8WJkHOOR3Zi7lo0sjoAYRlkaj52CSW1EUEtlHhvmuci9vjmC3+dJb2MLbcUcYnQo=
+  template:
+  - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}
+    (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Change view</a>)'
+  format: html
 env:
   global:
   - secure: CJwxMBA7Jf7xNTGTUgnTuarUXcQp13SU83dh+mM0E8JNS5PMakcJzAX1BxpX5eUygUGD/kklGiCTXv+IiUmaEjmHPw1IwYQqtP5Sitnt/Ujbw/nERfus4aiFpe2USCXJGYJs2/HCZoTb7XJU4do6YoFLGpA241BnRjI1iKPhf04=
