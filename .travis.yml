@@ -36,10 +36,10 @@ after_deploy:
 notifications:
   hipchat:
     rooms:
-      secure: O1wIsBGwHrzvH/Fc0AI9gAaBO4sjNp8Hz2d0plEpTL83sD03LfihVCshcFEFwuwT3aAckMXDoFkEY5mPlmafmy5A5VMUjE7pWiTEPVBepOSSSRsxMi0Sa4RFDlQGXKLIY9vkWW4Ct5GdAkLLNR5e+P6xWKBg3F2Iap3eBivu+VE=
+      secure: Ex5CDpeQ+2Z3guSdAR93/CRF98WaXU3hh48LL+2FTFgkcwPQagDQe5tgFHXZczwr4jyxJcLQXDfXiGTsxYLL2UDQK6pqP6ihCq9TzOkvxAgyuMDfWj5djeN6WychyLT0WpOe70Y90XGNUktGSuJCZwwxgDm6w0VP7kJHVJGfQuc=
   template:
-  - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}
-    (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Change view</a>)'
+    - '<a href="%{build_url}">%{branch}</a> - <a href="%{compare_url}">%{commit}</a>
+      : %{message}'
   format: html
 env:
   global:
