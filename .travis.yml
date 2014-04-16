@@ -33,17 +33,17 @@ deploy:
     - $IS_TAG != 0
 after_deploy:
 - echo "deployed $TRAVIS_BRANCH"
+- node deploy/hipchat-notify.js
 notifications:
   hipchat:
     rooms:
-      secure: Ex5CDpeQ+2Z3guSdAR93/CRF98WaXU3hh48LL+2FTFgkcwPQagDQe5tgFHXZczwr4jyxJcLQXDfXiGTsxYLL2UDQK6pqP6ihCq9TzOkvxAgyuMDfWj5djeN6WychyLT0WpOe70Y90XGNUktGSuJCZwwxgDm6w0VP7kJHVJGfQuc=
-  template:
+    - secure: Ex5CDpeQ+2Z3guSdAR93/CRF98WaXU3hh48LL+2FTFgkcwPQagDQe5tgFHXZczwr4jyxJcLQXDfXiGTsxYLL2UDQK6pqP6ihCq9TzOkvxAgyuMDfWj5djeN6WychyLT0WpOe70Y90XGNUktGSuJCZwwxgDm6w0VP7kJHVJGfQuc=
+    template:
     - '<a href="%{build_url}">%{branch}</a> - <a href="%{compare_url}">%{commit}</a>
       : %{message}'
-  format: html
+    format: html
 env:
   global:
   - secure: CJwxMBA7Jf7xNTGTUgnTuarUXcQp13SU83dh+mM0E8JNS5PMakcJzAX1BxpX5eUygUGD/kklGiCTXv+IiUmaEjmHPw1IwYQqtP5Sitnt/Ujbw/nERfus4aiFpe2USCXJGYJs2/HCZoTb7XJU4do6YoFLGpA241BnRjI1iKPhf04=
   - secure: TgQIBzqrssDUJ6JmLnzMynQ8uIu048d8DqNOaXStYNw5XbCzHbBox/655XPInRM5pTpZd/RtBkNVEON8BvDPGeIYmtIcvV/FQT717Fw2+pOTRuPUP7GZIlwCv76SeJIDIh69Z2UKtTcv7sNiirGcXfPMVJ0MomIMPhk0I58KGCs=
-  - secure: gmcSNHbUImLEFGUbj8WrYD23sKeIuUmMaJ2JFDygV2LVgP4EZSo8fFjF7HJcKPZQ5M8O1jBT6bpyE8MdOVHMtpVSa7nBfnd+LT/BzhpPWoOXFASchUt330Gqt+PaYQlUxTWEhQ3LzVhEsxOY08R/CDltS/7W511J/e8J7JQ2XPg=
-  - secure: Ia9yrVOyy1iRuGph8Ov28y4ftVMt9/SIyKu61T/bgy4E7/XhsDkC1zXKMrbnFF+AcpQXBZc1fhEd+Ph1SjwfIT66ZgK4xQz6a0MFT/EQGom6NkkJmy+cWyPlPfmvYh6LQmjkrhJzGHath7Ds7P8Gp2TuIH4Ejsd8smSJUkEF7zc=
+  - secure: cnaMKG1SrXqdKd+7j07t44fEWGjoUexT7heuKq0RwX/EC/ys2s8QVN2Ge1MkNGqy4LDq515c3i12C6wrt1xncncFwvjHfUyspCHhx1pJaKZhB4WUPOdbWPzmY6h8eQx2Hp3+5q3VZ6Z+Fv1aKs5VValcDPSreax2iJQGxbCdOG0=
