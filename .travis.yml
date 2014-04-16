@@ -15,7 +15,7 @@ deploy:
   upload-dir: integrations/goangular/latest
   on:
     all_branches: true
-    repo: goinstant/goangular
+    repo: colinmacdonald/goangular
     condition:
     - $IS_TAG != 0
     - $IS_LATEST != 0
@@ -27,7 +27,7 @@ deploy:
   upload-dir: integrations/goangular/$TRAVIS_BRANCH
   on:
     all_branches: true
-    repo: goinstant/goangular
+    repo: colinmacdonald/goangular
     condition:
     - $IS_TAG != 0
 after_deploy:
@@ -35,8 +35,7 @@ after_deploy:
 notifications:
   hipchat:
     rooms:
-    - $HIPCHAT_ROOM1
-    - $HIPCHAT_ROOM2
+      secure: jU67ko8XgfjdjjJRl0wm5KsxU7wFhI5H1tc6TxxVk5d5rZ/1t/jIucBCmvGh4YjSFjkqnuuZocEKklySnQiwbmpZpuN0zYS/2twPqL46/dv+u+34+T8ZkludLDc4Zw6Rsj2YxhnAeTrdfUpOe4M/+mZOSm8Zu5SLnysuXXV2Ar0=
   template:
   - '<a href="%{build_url}">%{branch}</a> - <a href="%{compare_url}">%{commit}</a>
     : %{message}'
