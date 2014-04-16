@@ -1,42 +1,42 @@
 language: node_js
 node_js:
-- '0.10'
-before_script:
-- npm install -g gulp
-- source deploy/tags.sh
+  - '0.10'
+before_install:
+  - source deploy/tags.sh
+  - npm install -g gulp
 before_deploy:
-- gulp build
+  - gulp build
 deploy:
-- provider: s3
-  access_key_id: $AWS_S3_ID
-  secret_access_key: $AWS_S3_SECRET
-  bucket: goangular-travis-test
-  local-dir: dist
-  upload-dir: integrations/goangular/latest
-  on:
-    all_branches: true
-    repo: colinmacdonald/goangular
-    condition:
-    - $IS_TAG != 0
-    - $IS_LATEST != 0
-- provider: s3
-  access_key_id: $AWS_S3_ID
-  secret_access_key: $AWS_S3_SECRET
-  bucket: goangular-travis-test
-  local-dir: dist
-  upload-dir: integrations/goangular/$TRAVIS_BRANCH
-  on:
-    all_branches: true
-    repo: colinmacdonald/goangular
-    condition:
-    - $IS_TAG != 0
+  - provider: s3
+    access_key_id: $AWS_S3_ID
+    secret_access_key: $AWS_S3_SECRET
+    bucket: goangular-travis-test
+    local-dir: dist
+    upload-dir: integrations/goangular/latest
+    on:
+      all_branches: true
+      repo: colinmacdonald/goangular
+      condition:
+      - $IS_TAG != 0
+      - $IS_LATEST != 0
+  - provider: s3
+    access_key_id: $AWS_S3_ID
+    secret_access_key: $AWS_S3_SECRET
+    bucket: goangular-travis-test
+    local-dir: dist
+    upload-dir: integrations/goangular/$TRAVIS_BRANCH
+    on:
+      all_branches: true
+      repo: colinmacdonald/goangular
+      condition:
+      - $IS_TAG != 0
 after_deploy:
-- echo "deployed $TRAVIS_BRANCH"
-- node deploy/hipchat-notify.js
+  - echo "deployed $TRAVIS_BRANCH"
+  - node deploy/hipchat-notify.js
 notifications:
   hipchat:
     rooms:
-    - secure: Ex5CDpeQ+2Z3guSdAR93/CRF98WaXU3hh48LL+2FTFgkcwPQagDQe5tgFHXZczwr4jyxJcLQXDfXiGTsxYLL2UDQK6pqP6ihCq9TzOkvxAgyuMDfWj5djeN6WychyLT0WpOe70Y90XGNUktGSuJCZwwxgDm6w0VP7kJHVJGfQuc=
+      secure: WR63+IaDpipd26XcplO0IRo4BzrghEwNjYMgD2trqI3wyE2+FJ8QLTXNk21SR+5cDBszqkdwY1/ErzOyiPiKEwWVXZ+uj9DGHOHUb3gEVYmPJjwrqg/lE3BVAo3p0+iV7SwWNCuN/rhpxGBgsbfw50m0iPyOVEOmxzJhuACCzgI=
     template:
     - '<a href="%{build_url}">%{branch}</a> - <a href="%{compare_url}">%{commit}</a>
       : %{message}'
@@ -46,4 +46,4 @@ env:
   - secure: CJwxMBA7Jf7xNTGTUgnTuarUXcQp13SU83dh+mM0E8JNS5PMakcJzAX1BxpX5eUygUGD/kklGiCTXv+IiUmaEjmHPw1IwYQqtP5Sitnt/Ujbw/nERfus4aiFpe2USCXJGYJs2/HCZoTb7XJU4do6YoFLGpA241BnRjI1iKPhf04=
   - secure: TgQIBzqrssDUJ6JmLnzMynQ8uIu048d8DqNOaXStYNw5XbCzHbBox/655XPInRM5pTpZd/RtBkNVEON8BvDPGeIYmtIcvV/FQT717Fw2+pOTRuPUP7GZIlwCv76SeJIDIh69Z2UKtTcv7sNiirGcXfPMVJ0MomIMPhk0I58KGCs=
   - secure: cnaMKG1SrXqdKd+7j07t44fEWGjoUexT7heuKq0RwX/EC/ys2s8QVN2Ge1MkNGqy4LDq515c3i12C6wrt1xncncFwvjHfUyspCHhx1pJaKZhB4WUPOdbWPzmY6h8eQx2Hp3+5q3VZ6Z+Fv1aKs5VValcDPSreax2iJQGxbCdOG0=
-  - secure: O0r6h3+bl3O2L/HOhf+oGlkmn5VjVil7A3M5LqdrX3LUKhhR7i6c8PBubzkZUjMR3SNs8ZpYWQ0FCwRKS+Le2aV+UpmV3RGB75ZZeaA4+OTiheT49HFKyVp9odA/8YuBBMnvqGlrri4+yArcILvGIlAt3Z1iuizs5Vzx/eQMVgg=
+  - secure: NaMdLGfA1XKzVujpksCa75R5O4MaR3Jxfs6WKvAENoYvo8110I/hVmaiKithS71w9qhtMv43pUpbopDjz09pY2vOQ7thutI6kKP9iluiOa/CDH89xjMOWiQoyWH3sPREtyGbDgf2+75X4eftufgEnO/Q07+t26Hsq0Xs9RWPTjA=

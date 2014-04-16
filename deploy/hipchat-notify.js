@@ -2,7 +2,7 @@
 
 'use strict';
 
-var Hipchatter = require('hipchatter');
+var hipchat = require('node-hipchat');
 var _ = require('lodash');
 
 var HIPCHAT_TOKEN = process.env.HIPCHAT_TOKEN;
@@ -11,20 +11,22 @@ var ROOMS = process.env.ROOMS.split(/,\s?/);
 var IS_LATEST = parseInt(process.env.IS_LATEST);
 var LATEST = IS_LATEST !== 0 ? '/latest' : '';
 
-var hipchatter = new Hipchatter(HIPCHAT_TOKEN, 'https://api.hipchat.com/v2/');
+var HC = new hipchat(HIPCHAT_TOKEN);
 
 var message = 'Update of <a href="http://github.com/goinstant/goangular/' +
               'releases/tag/' + BRANCH +'">GoAngular:' + BRANCH + LATEST +
               '</a> to <a href="https://cdn.goinstant.net/integrations/' +
-              'goangular/' + BRANCH + '/goangular.js">Production</a> was' +
+              'goangular/' + BRANCH + '/goangular.js">Production</a> was ' +
               'successful!';
 
-var opts = {
+var params = {
+  from: 'Travis CI',
   message: message,
-  color: 'purple',
-  token: HIPCHAT_TOKEN
+  color: 'purple'
 };
 
 _.each(ROOMS, function(room) {
-  hipchatter.notify(room, opts, function() {});
+  params.room = room;
+
+  HC.postMessage(params, function() {});
 });
