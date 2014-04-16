@@ -35,14 +35,13 @@ after_deploy:
 notifications:
   hipchat:
     rooms:
-      secure: jU67ko8XgfjdjjJRl0wm5KsxU7wFhI5H1tc6TxxVk5d5rZ/1t/jIucBCmvGh4YjSFjkqnuuZocEKklySnQiwbmpZpuN0zYS/2twPqL46/dv+u+34+T8ZkludLDc4Zw6Rsj2YxhnAeTrdfUpOe4M/+mZOSm8Zu5SLnysuXXV2Ar0=
-  template:
+      - $HIPCHAT_ROOM1
+      template:
   - '<a href="%{build_url}">%{branch}</a> - <a href="%{compare_url}">%{commit}</a>
     : %{message}'
   format: html
 env:
   global:
-  - secure: hofOxLRcWVq2vqH3ZY57pr1JSK3HmosuDsPbfn/Q9smENSfa1wGXypim8uCvbhofXQRfVSLPQNcPBXqvq5fFjn+quPhaMswDupgQkJhwtCpkgTtHCAN2wyrmv8hF31ugT3UdktpikJAgr1y27+IBpa5HYQi5ey7y3ycW8WH4J64=
-  - secure: DqlM4haZO7VDHB49aiS4eKWwZ/shrCsHvTDTyP5c5qVWyXXGY9yM0nwIav5M6aWH1qqXQ0BY+QfOjwFck9gob1WqEA7twufOa+Xf+I1MOAUsOuxBZ79DOkSB+RjFJJjSXbIJAv0k4VVHHtKvy3VnGfTc6GrOviqH2ac+rdL+iKo=
-  - secure: Kc2aM/N+4ZRJ0OuwmBM5PPlaZYQbWi+ZglqE8jDhFANPtFLMy8ooAXWsyNKt9Feobze5l8kkuUxLowh5DB7UXGPjTPOVf+5srIx0sCqu0Jz1w9CRqUo1xxzswO//bFxHwKACjEJYzBqLOGKrNtrBFvUF70JU7/9Iq9JzZSUvDkg=
-  - secure: iVwzuaF8d6D3pu59bPeGskFbDLZU9RrVWRI0bm9CosPaKFcB/97CXIxpENgPnumNWWOVg3jB2gdq0ErqtWSrC5h6L9WnUnt4a31kaXEb14Ahy3p6ozwsA2dYur48IWEIkSviKQRAgALEi7RFv5Wmf/sHkyKOHuT1UVy4QpaOlyI=
+  - secure: CJwxMBA7Jf7xNTGTUgnTuarUXcQp13SU83dh+mM0E8JNS5PMakcJzAX1BxpX5eUygUGD/kklGiCTXv+IiUmaEjmHPw1IwYQqtP5Sitnt/Ujbw/nERfus4aiFpe2USCXJGYJs2/HCZoTb7XJU4do6YoFLGpA241BnRjI1iKPhf04=
+  - secure: TgQIBzqrssDUJ6JmLnzMynQ8uIu048d8DqNOaXStYNw5XbCzHbBox/655XPInRM5pTpZd/RtBkNVEON8BvDPGeIYmtIcvV/FQT717Fw2+pOTRuPUP7GZIlwCv76SeJIDIh69Z2UKtTcv7sNiirGcXfPMVJ0MomIMPhk0I58KGCs=
+  - secure: gmcSNHbUImLEFGUbj8WrYD23sKeIuUmMaJ2JFDygV2LVgP4EZSo8fFjF7HJcKPZQ5M8O1jBT6bpyE8MdOVHMtpVSa7nBfnd+LT/BzhpPWoOXFASchUt330Gqt+PaYQlUxTWEhQ3LzVhEsxOY08R/CDltS/7W511J/e8J7JQ2XPg=
