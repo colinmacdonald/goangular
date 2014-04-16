@@ -35,8 +35,8 @@ after_deploy:
 notifications:
   hipchat:
     rooms:
-      - $HIPCHAT_ROOM1
-      template:
+    - $HIPCHAT_ROOM1
+  template:
   - '<a href="%{build_url}">%{branch}</a> - <a href="%{compare_url}">%{commit}</a>
     : %{message}'
   format: html
