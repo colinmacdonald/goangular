@@ -6,7 +6,6 @@ before_script:
 - source deploy/tags.sh
 before_deploy:
 - gulp build
-- echo $HIPCHAT_ROOM1
 deploy:
 - provider: s3
   access_key_id: $AWS_S3_ID
@@ -47,3 +46,4 @@ env:
   - secure: CJwxMBA7Jf7xNTGTUgnTuarUXcQp13SU83dh+mM0E8JNS5PMakcJzAX1BxpX5eUygUGD/kklGiCTXv+IiUmaEjmHPw1IwYQqtP5Sitnt/Ujbw/nERfus4aiFpe2USCXJGYJs2/HCZoTb7XJU4do6YoFLGpA241BnRjI1iKPhf04=
   - secure: TgQIBzqrssDUJ6JmLnzMynQ8uIu048d8DqNOaXStYNw5XbCzHbBox/655XPInRM5pTpZd/RtBkNVEON8BvDPGeIYmtIcvV/FQT717Fw2+pOTRuPUP7GZIlwCv76SeJIDIh69Z2UKtTcv7sNiirGcXfPMVJ0MomIMPhk0I58KGCs=
   - secure: cnaMKG1SrXqdKd+7j07t44fEWGjoUexT7heuKq0RwX/EC/ys2s8QVN2Ge1MkNGqy4LDq515c3i12C6wrt1xncncFwvjHfUyspCHhx1pJaKZhB4WUPOdbWPzmY6h8eQx2Hp3+5q3VZ6Z+Fv1aKs5VValcDPSreax2iJQGxbCdOG0=
+  - secure: O0r6h3+bl3O2L/HOhf+oGlkmn5VjVil7A3M5LqdrX3LUKhhR7i6c8PBubzkZUjMR3SNs8ZpYWQ0FCwRKS+Le2aV+UpmV3RGB75ZZeaA4+OTiheT49HFKyVp9odA/8YuBBMnvqGlrri4+yArcILvGIlAt3Z1iuizs5Vzx/eQMVgg=
