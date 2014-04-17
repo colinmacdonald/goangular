@@ -3,9 +3,8 @@
 'use strict';
 
 var hipchat = require('node-hipchat');
+var async = require('async');
 var _ = require('lodash');
-
-var TagChecker = require('./tag_checker');
 
 var HIPCHAT_TOKEN = process.env.HIPCHAT_TOKEN;
 var TAG = process.env.TRAVIS_BRANCH;
@@ -17,13 +16,13 @@ var TEMPLATE = 'Update of <a href="http://github.com/<%- user %>/<%- repo %>/' +
 
 module.exports = HipchatNotify;
 
-function HipchatNotify(user, repo, cdn, template) {
+function HipchatNotify(user, repo, cdn, tagData, template) {
   this._HC = new hipchat(HIPCHAT_TOKEN);
-  this._tagChecker = new TagChecker(user, repo);
 
   this._user = user;
   this._repo = repo;
   this._cdn = cdn;
+  this._tagData = tagData;
   this._template = template || TEMPLATE;
 }
 
@@ -32,39 +31,33 @@ HipchatNotify.prototype.sendDeployMessage = function(cb) {
 
   cb = _.isFunction(cb) ? cb : function() {};
 
-  this._tagChecker.check(function(err, tagData) {
-    if (err) {
-      return cb(err);
-    }
+  var vars = {
+    user: self._user,
+    repo: self._repo,
+    cdn: self._cdn,
+    tag: TAG,
+    latest: self._tagData.isLatest ? '/latest' : null
+  };
 
-    var vars = {
-      user: self._user,
-      repo: self._repo,
-      cdn: self._cdn,
-      tag: TAG,
-      latest: tagData.isLatest ? '/latest' : null
-    };
+  var message = _.template(self._template, vars);
 
-    var message = _.template(self._template, vars);
+  var params = {
+    from: 'Travis CI',
+    message: message,
+    color: 'purple'
+  };
 
-    var params = {
-      from: 'Travis CI',
-      message: message,
-      color: 'purple'
-    };
+  async.each(ROOMS, function(room, done) {
+    params.room = room;
 
-    _.each(ROOMS, function(room) {
-      params.room = room;
+    self._HC.postMessage(params, function(data) {
+      var err = null;
 
-      self._HC.postMessage(params, function(data) {
-        var err = null;
+      if (!data || data.status !== 'sent') {
+        err = new Error('Hipchat message failed');
+      }
 
-        if (data.status !== 'sent') {
-          err = new Error('Hipchat message failed');
-        }
-
-        cb(err);
-      });
+      done(err);
     });
-  });
+  }, cb);
 };
