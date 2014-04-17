@@ -1,0 +1,8 @@
+{
+  "source": "dist",
+  "user": "colinmacdonald",
+  "repo": "goangular",
+  "cdn": "https://cdn.goinstant.net/integrations",
+  "namespace": "integrations",
+  "bucket": "goangular-travis-test"
+}
