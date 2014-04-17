@@ -16,14 +16,14 @@ var TEMPLATE = 'Update of <a href="http://github.com/<%- user %>/<%- repo %>/' +
 
 module.exports = HipchatNotify;
 
-function HipchatNotify(user, repo, cdn, tagData, template) {
+function HipchatNotify(opts) {
   this._HC = new hipchat(HIPCHAT_TOKEN);
 
-  this._user = user;
-  this._repo = repo;
-  this._cdn = cdn;
-  this._tagData = tagData;
-  this._template = template || TEMPLATE;
+  this._user = opts.user;
+  this._repo = opts.repo;
+  this._cdn = opts.cdn;
+  this._tagData = opts.tagData;
+  this._template = opts.template || TEMPLATE;
 }
 
 HipchatNotify.prototype.sendDeployMessage = function(cb) {

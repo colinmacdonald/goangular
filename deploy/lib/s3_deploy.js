@@ -26,7 +26,6 @@ function S3Deploy(config) {
   this._cdn = config.cdn;
   this._template = config._template || null;
   this._tagData = null;
-
   this._bucket = config.bucket;
 
   this._s3Config = {
@@ -41,21 +40,59 @@ function S3Deploy(config) {
     latest: path + '/' + LATEST + '/'
   };
 
-  this._hipchatNotify = new HipchatNotify(this._user, this._repo, this._cdn,
-                                          this._template);
   this._tagChecker = new TagChecker(this._user, this._repo);
+  this._hipchatNotify = null;
 
   AWS.config.update(this._s3Config);
   this._s3 = new AWS.S3();
 
   _.bindAll(this, [
+    '_validate',
     '_getFileNames',
     '_uploadFiles',
     '_uploadFile'
   ]);
 }
 
-S3Deploy.prototype.validate = function(cb) {
+S3Deploy.prototype.deploy = function(cb) {
+  var self = this;
+
+  this._validate(function(err, result) {
+    if (err) {
+      return cb(err);
+    }
+
+    if (!result) {
+      console.log('no deploy.');
+
+      return cb(null);
+    }
+
+    var deployType = self._tagData.isLatest ? TAG + '/LATEST': TAG;
+    console.log('starting deploy of: ' + deployType + '...');
+
+    var tasks = [
+      _.bind(self._getFileNames, self),
+      _.bind(self._uploadFiles, self)
+    ];
+
+    async.waterfall(tasks, function() {
+      var opts = {
+        user: self._user,
+        repo: self._repo,
+        cdn: self._cdn,
+        tagData: self._tagData,
+        template: self._template
+      };
+
+      self._hipchatNotify = new HipchatNotify(opts);
+
+      self._hipchatNotify.sendDeployMessage(cb);
+    });
+  });
+};
+
+S3Deploy.prototype._validate = function(cb) {
   var self = this;
 
   this._tagChecker.check(function(err, tagData) {
@@ -74,19 +111,6 @@ S3Deploy.prototype.validate = function(cb) {
     }
 
     return cb(null, true);
-  });
-};
-
-S3Deploy.prototype.deploy = function(cb) {
-  var self = this;
-
-  var tasks = [
-    _.bind(this._getFileNames, this),
-    _.bind(this._uploadFiles, this)
-  ];
-
-  async.waterfall(tasks, function() {
-    self._hipchatNotify.sendDeployMessage(cb);
   });
 };
 
