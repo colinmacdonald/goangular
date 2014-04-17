@@ -10,6 +10,10 @@ var _ = require('lodash');
 var TagChecker = require('./tag_checker');
 var HipchatNotify = require('./hipchat_notify');
 
+var S3_ID = process.env.AWS_S3_ID;
+var S3_SECRET = process.env.AWS_S3_SECRET;
+
+var TRAVIS_REPO_SLUG = process.env.TRAVIS_REPO_SLUG;
 var TAG = process.env.TRAVIS_BRANCH;
 var LATEST = 'latest';
 
@@ -21,11 +25,16 @@ function S3Deploy(config) {
   this._repo = config.repo;
   this._cdn = config.cdn;
   this._template = config._template || null;
-  this._latestTag = false;
+  this._tagData = null;
+
+  this._bucket = config.bucket;
+
+  this._s3Config = {
+    accessKeyId: S3_ID,
+    secretAccessKey: S3_SECRET
+  };
 
   var path = config.namespace + '/' + this._repo;
-  this._bucket = config.bucket;
-  this._s3Config = config.s3Config;
 
   this._keys = {
     tag: path + '/' + TAG + '/',
@@ -35,27 +44,43 @@ function S3Deploy(config) {
   this._hipchatNotify = new HipchatNotify(this._user, this._repo, this._cdn,
                                           this._template);
   this._tagChecker = new TagChecker(this._user, this._repo);
-  this._s3 = null;
+
+  AWS.config.update(this._s3Config);
+  this._s3 = new AWS.S3();
 
   _.bindAll(this, [
-    '_isLatest',
     '_getFileNames',
     '_uploadFiles',
     '_uploadFile'
   ]);
 }
 
-S3Deploy.prototype.setup = function() {
-  AWS.config.update(this._s3Config);
+S3Deploy.prototype.validate = function(cb) {
+  var self = this;
 
-  this._s3 = new AWS.S3();
+  this._tagChecker.check(function(err, tagData) {
+    if (err) {
+      return cb(err, false);
+    }
+
+    self._tagData = tagData;
+
+    if (self._tagData.isTag === false) {
+      return cb(null, false);
+    }
+
+    if (TRAVIS_REPO_SLUG !== self._user + '/' + self._repo) {
+      return cb(null, false);
+    }
+
+    return cb(null, true);
+  });
 };
 
 S3Deploy.prototype.deploy = function(cb) {
   var self = this;
 
   var tasks = [
-    _.bind(this._isLatest, this),
     _.bind(this._getFileNames, this),
     _.bind(this._uploadFiles, this)
   ];
@@ -75,20 +100,6 @@ S3Deploy.prototype._getFileNames = function (cb) {
   });
 };
 
-S3Deploy.prototype._isLatest = function(cb) {
-  var self = this;
-
-  this._tagChecker.check(function(err, tagData) {
-    if (err) {
-      return cb(err);
-    }
-
-    self._latestTag = tagData.isLatest;
-
-    return cb();
-  });
-};
-
 S3Deploy.prototype._uploadFiles = function(fileNames, cb) {
   var self = this;
 
@@ -102,7 +113,7 @@ S3Deploy.prototype._uploadFiles = function(fileNames, cb) {
         _.bind(self._uploadFile, self, data, self._keys.tag + fileName)
       ];
 
-      if (self._latestTag) {
+      if (self._tagData.isLatest) {
         tasks.push(_.bind(self._uploadFile, self, data,
                    self._keys.latest + fileName));
       }

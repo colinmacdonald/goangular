@@ -50,7 +50,7 @@ function isTag(tags) {
   _.each(tags, function(tag) {
     var sha = tag.commit.sha;
 
-    if (sha === TRAVIS_COMMIT) {
+    if (sha === TRAVIS_COMMIT && tag.name === TRAVIS_BRANCH) {
       result = true;
 
       return false;
