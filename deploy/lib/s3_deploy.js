@@ -59,13 +59,13 @@ S3Deploy.prototype.deploy = function(cb) {
 
   this._validate(function(err, result) {
     if (err) {
-      return cb(err);
+      return cb(err, false);
     }
 
     if (!result) {
       console.log('no deploy.');
 
-      return cb(null);
+      return cb(null, false);
     }
 
     var deployType = self._tagData.isLatest ? TAG + '/LATEST': TAG;
@@ -87,7 +87,9 @@ S3Deploy.prototype.deploy = function(cb) {
 
       self._hipchatNotify = new HipchatNotify(opts);
 
-      self._hipchatNotify.sendDeployMessage(cb);
+      self._hipchatNotify.sendDeployMessage(function(err) {
+        cb(err, true);
+      });
     });
   });
 };
